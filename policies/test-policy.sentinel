@@ -4,9 +4,7 @@ approved_repos = ["\\./",
                 "\\.\\./.*", 
                 ]
 
-configsv1 = filter tfconfigv1.modules as _, mc {
-	mc.modules is not null
-}
+configsv1 = filter tfconfigv1.modules as _, mc { true }
 
 print(configsv1)
 
