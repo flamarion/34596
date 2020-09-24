@@ -8,62 +8,62 @@ configsv1 = filter tfconfigv1.modules as _, mc { true }
 
 print(configsv1)
 
-# for configsv1 as _, con {
-# 	con["module_name"] = _
-# }
+for configsv1 as _, con {
+	con["module_name"] = _
+}
 
-# modules_filter = filter configsv1 as _, config {
-# 	config.modules is not null
-# }
+modules_filter = filter configsv1 as _, config {
+	config.modules is not null
+}
 
-# configuration_sources = []
+configuration_sources = []
 
-# for modules_filter as _, config {
-# 	for config.modules as _, c {
-# 		c["source_val"] = _
-# 		c["module_name"] = config["module_name"]
-# 		append(configuration_sources, c)		
-# 	}	
-# }
+for modules_filter as _, config {
+	for config.modules as _, c {
+		c["source_val"] = _
+		c["module_name"] = config["module_name"]
+		append(configuration_sources, c)		
+	}	
+}
 
-# final_output = []
+final_output = []
 
-# print_sources_v1 = func (source){
-# 	validated = true
-# 	out = {}
-# 	out["source_name"] = source.module_name+":"+source.source_val
-# 	out["source_val"] = source.source
-# 	for approved_repos as ar {
-# 		if source.source matches ar {
-# 			out["match_val"] = ar
-# 			out["match_result"] = true
-# 			return out
-# 		}		
-# 	}	
-# 	out["match_val"] = "NONE"
-# 	out["match_result"] = false
-# 	validated = false
-# 	return out
-# }
+print_sources_v1 = func (source){
+	validated = true
+	out = {}
+	out["source_name"] = source.module_name+":"+source.source_val
+	out["source_val"] = source.source
+	for approved_repos as ar {
+		if source.source matches ar {
+			out["match_val"] = ar
+			out["match_result"] = true
+			return out
+		}		
+	}	
+	out["match_val"] = "NONE"
+	out["match_result"] = false
+	validated = false
+	return out
+}
 
-# for configuration_sources as source {
-# 	line_output = print_sources_v1(source)
-# 	append(final_output, line_output)
-# 	print(line_output)
-# }
+for configuration_sources as source {
+	line_output = print_sources_v1(source)
+	append(final_output, line_output)
+	print(line_output)
+}
 
-# check_source_results = func(final_output) {
-# 	for final_output as f {
-# 		if f["match_result"] == false {
-# 			print (f)
-# 			return false
-# 		}
-# 	}
-# 	return true
-# }
+check_source_results = func(final_output) {
+	for final_output as f {
+		if f["match_result"] == false {
+			print (f)
+			return false
+		}
+	}
+	return true
+}
 
-# main = rule {
-# 	check_source_results(final_output)
-# }
+main = rule {
+	check_source_results(final_output)
+}
 
 main = rule { true }
