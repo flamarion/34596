@@ -20,17 +20,15 @@ modules_filter = filter configsv1 as _, conf {
 
 print(modules_filter)
 
-configuration_sources = []
+# configuration_sources = []
 
-for modules_filter as _, config {
-	for config as _, c {
-		c["source_val"] = _
-		c["module_name"] = config["module_name"]
-		append(configuration_sources, c)		
-	}	
-}
-
-print(configuration_sources)
+# for modules_filter as _, config {
+# 	for config.modules as _, c {
+# 		c["source_val"] = _
+# 		c["module_name"] = config["module_name"]
+# 		append(configuration_sources, c)		
+# 	}	
+# }
 
 # final_output = []
 
