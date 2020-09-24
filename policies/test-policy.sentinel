@@ -13,7 +13,7 @@ for configsv1 as _, con {
 }
 
 modules_filter = filter configsv1 as _, config {
-	config.modules is not null
+	config.config is not null
 }
 
 configuration_sources = []
