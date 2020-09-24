@@ -6,7 +6,7 @@ data "archive_file" "lambda_zip" {
 
 resource "null_resource" "test" {
   triggers = {
-    always_run = timestamp()
+    always_run = uuid()
   }
   provisioner "local-exec" {
     command = "ls -l *"
@@ -14,7 +14,7 @@ resource "null_resource" "test" {
 }
 
 output "hash" {
-  value = data.archive_file.lambda_zip.output_base64sha256
+  value = data.archive_file.lambda_zip.output_md5
 }
 
 output "path" {
